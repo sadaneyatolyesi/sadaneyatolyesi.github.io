@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Sada Ney Atölyesi</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+
+
+body {
+  font-family: 'Georgia', serif;
+  margin: 0;
+  padding: 0;
+  background: url('resimler/daha da beyaz yap ya.png') repeat;
+  background-color: #f2f0e5;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+    header {
+      background: linear-gradient(to right, rgba(46,96,73,0.7), rgba(111,168,141,0.7)),
+                  url('resimler/2025-10-31_110212.png') center/cover no-repeat;
+      color: white;
+      padding: 10px 5px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    header h1 {
+      font-size: 2.4em;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+    }
+
+    header p {
+      font-size: 1.1em;
+      opacity: 0.95;
+    }
+
+    nav {
+      background: #3f7d65;
+      padding: 12px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+      font-style: italic;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #c6f5d6;
+    }
+
+    section {
+      padding: 30px 20px;
+      max-width: 1000px;
+      margin: auto;
+      font-style: italic;
+      text-align: left;
+    }
+
+    .instagram-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+      font-style: italic;
+      color: #2e6049;
+      font-size: 1em;
+    }
+
+    .instagram-link i {
+      font-size: 1.3em;
+      color: #E1306C;
+    }
+
+    .instagram-link a {
+      text-decoration: none;
+      color: #2e6049;
+      font-weight: bold;
+    }
+
+    .iletisim {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+      margin-top: 10px;
+      font-size: 1em;
+      color: #2e6049;
+    }
+
+    .iletisim-satir {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .shopier-satinal {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-style: italic;
+      color: #2e6049;
+      font-size: 0.95em;
+    }
+
+    .iletisim a img,
+    .shopier-satinal img {
+      transition: transform 0.3s ease;
+    }
+
+    .iletisim a img:hover,
+    .shopier-satinal img:hover {
+      transform: scale(1.1);
+    }
+
+    .instagram-galeri {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .instagram-galeri blockquote.instagram-media {
+      transform: scale(0.85);
+      transform-origin: top center;
+      max-width: 280px;
+      min-width: 220px;
+      width: 100%;
+      margin: auto;
+    }
+
+    .video-dersler {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 20px;
+      justify-content: center;
+    }
+
+    .video-dersler iframe {
+      width: 300px;
+      height: 170px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    @media (max-width: 768px) {
+      .video-dersler iframe {
+        width: 100%;
+        height: auto;
+      }
+
+      .instagram-galeri blockquote.instagram-media {
+        transform: scale(0.75);
+      }
+
+      nav a {
+        display: block;
+        margin: 10px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Sada Ney Atölyesi</h1>
+    <p>Gelenekten ilham alan el yapımı neyler</p>
+  </header>
+
+  <nav>
+    <a href="#anasayfa">Ana Sayfa</a>
+    <a href="#galeri">Galeri</a>
+    <a href="#hakkimizda">Hakkımızda</a>
+    <a href="#neydersleri">Ney Dersleri</a>
+  </nav>
+
+  <section id="anasayfa">
+    <h2>Hoş Geldiniz</h2>
+    <p>
+      Bu site, geleneksel Türk müziğinin en zarif enstrümanlarından biri olan ney üzerine kurulmuştur. 
+      El yapımı neyler, ustalıkla seçilmiş kamışlar ve ince işçilikle hazırlanır.
+    </p>
+
+
+  <h3>İletişim</h3>
+
+  <div class="iletisim">
+    <div class="iletisim-satir">
+      <a href="https://wa.me/905387945202?text=Merhaba%2C%20ney%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum." target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp simgesi" width="20" height="20">
+      </a>
+      <span><strong>Gsm: 0538 794 5202</strong></span>
+    </div>
+
+    <div class="shopier-satinal">
+      <a href="https://www.shopier.com/sadaneyatolyesi" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="Alışveriş Sepeti" width="22" height="22" title="Satın Almak için tıklayın">
+      </a>
+      <span><strong>shopier.com</strong></span>
+    </div>
+  </div>
+
+  <div class="instagram-link">
+    <a href="https://www.instagram.com/sadaneYatolyesi" target="_blank">
+      <i class="fab fa-instagram"></i>
+      <span>SadaNeyAtolyesi</span>
+    </a>
+  </div>
+</p>
+  <span><strong>Bize ulaşmak için iletişim kısmındaki iconlara tıklamanız yeterlidir.</strong></span>
+  </p>
+</section>
+
+
+  </section>
+
+  <section id="galeri">
+    <h2 style="text-align:center;">Galeri</h2>
+    <p style="text-align:center;">Instagram'dan seçilmiş kareler:</p>
+    <div class="instagram-galeri">
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DP5tkokCEzx/" data-instgrm-version="14"></blockquote>
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DN_CT45CObJ/" data-instgrm-version="14"></blockquote>
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DMiY0J_I6kI/" data-instgrm-version="14"></blockquote>
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DLIUpRHoSYf/" data-instgrm-version="14"></blockquote>
+    </div>
+    <script async src="//www.instagram.com/embed.js"></script>
+  </section>
+
+  <section id="hakkimizda">
+    <h2>Hakkımızda</h2>
+    <p>
+Sada Ney Atölyesi, geleneksel Türk müziğinin en kadim enstrümanlarından biri olan neyin yapımında, yüzyılların birikimini çağdaş detaylarla harmanlayan özel bir atölyedir. Her ney, doğanın içinden özenle seçilmiş Arundo donax kamışından elde edilir; sabırla, sevgiyle ve ustalıkla şekillendirilir. 
+Bu süreç, sadece bir enstrüman üretimi değil, aynı zamanda bir kültürün, bir nefesin ve bir yolculuğun yeniden doğuşudur.
+Atölyemizdeki her ney, hem ses hem ruh taşır. Geleneksel ölçülerle modern akustik anlayışı birleştirerek, hem icracıya hem dinleyiciye derinlikli bir deneyim sunar. El işçiliğiyle yapılan her detay, sufi geleneğin sadeliğini ve zarafetini yansıtır.
+Amacımız, bu kadim enstrümanı tanıtmak, öğretmek ve müzikseverlerle buluşturmaktır. Sada Ney Atölyesi, sadece bir üretim alanı değil; aynı zamanda neyin hikâyesini anlatan, onu yaşatan ve yeni kuşaklara aktaran bir kültür durağıdır.  
+
+    <p>
+      Amacımız, bu kadim enstrümanı tanıtmak, öğretmek ve müzikseverlerle buluşturmaktır.
+    </p>
+
+    </p>
+<span><strong>Bize ulaşmak için iletişim kısmındaki iconlara tıklamanız yeterlidir.</strong></span>
+</p>
+  </section>
+
+<section id="neydersleri">
+  <h2>Ney Dersleri</h2>
+  <p>Temel ney eğitimi ve ileri teknikler için video derslerimiz:</p>
+  <div class="video-dersler">
+    <iframe src="https://www.youtube.com/embed/6Xc-dP06sRs" title="Ney Eğitimi 1" frameborder="0" allowfullscreen></iframe>
+    <iframe src="https://www.youtube.com/embed/loXARleKZHE" title="Ney Eğitimi 1" frameborder="0" allowfullscreen></iframe>
+    <iframe src="https://www.youtube.com/embed/kKMncCSxd9o" title="Ney Eğitimi 1" frameborder="0" allowfullscreen></iframe>
+    <iframe src="https://www.youtube.com/embed/GhJkfKYuNFM" title="Ney Eğitimi 1" frameborder="0" allowfullscreen></iframe>
+    <iframe src="https://www.youtube.com/embed/N5EsU8_2ook" title="Ney Eğitimi 1" frameborder="0" allowfullscreen></iframe>
+    <iframe src="https://www.youtube.com/embed/JsI8qPTrDWk" title="Ney Eğitimi 1" frameborder="0" allowfullscreen></iframe>
+    <iframe src="https://www.youtube.com/embed/2o-S414XFB8" title="Ney Eğitimi 1" frameborder="0" allowfullscreen></iframe>
+    <iframe src="https://www.youtube.com/embed/W1d4GFiPVfg" title="Ney Eğitimi 1" frameborder="0" allowfullscreen></iframe>
+    <iframe src="https://www.youtube.com/embed/ZCJ4uzz9_6E" title="Ney Eğitimi 1" frameborder="0" allowfullscreen></iframe>
+    <iframe src="https://www.youtube.com/embed/Rr_CYhFR0wg" title="Ney Eğitimi 1" frameborder="0" allowfullscreen></iframe>
+    <iframe src="https://www.youtube.com/embed/nRxzp694n08" title="Ney Eğitimi 1" frameborder="0" allowfullscreen></iframe>
+    <iframe src="https://www.youtube.com/embed/72A_ssIe_-o" title="Ney Eğitimi 1" frameborder="0" allowfullscreen></iframe>
+    <iframe src="https://www.youtube.com/embed/o6uklzNifl4" title="Ney Eğitimi 1" frameborder="0" allowfullscreen></iframe>
+  </div>
+</section>
