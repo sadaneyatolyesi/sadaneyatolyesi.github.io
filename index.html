@@ -321,6 +321,14 @@ Amacımız, bu kadim enstrümanı tanıtmak, öğretmek ve müzikseverlerle bulu
   <span id="audio-icon">🔈</span>
 </button>
 
+<!-- Overlay shown when autoplay is blocked -->
+<div id="audio-overlay" role="dialog" aria-hidden="true">
+  <div class="audio-overlay-inner">
+    <p>Tarayıcı otomatik oynatmayı engelledi. Müzik çalmak için ekranda bir kez tıklayın.</p>
+    <button id="audio-overlay-btn">Çal</button>
+  </div>
+</div>
+
 <style>
   .audio-toggle{
     position: fixed;
@@ -341,6 +349,39 @@ Amacımız, bu kadim enstrümanı tanıtmak, öğretmek ve müzikseverlerle bulu
     z-index: 9999;
   }
   .audio-toggle[aria-pressed="true"]{ background: rgba(196,53,53,0.95); }
+</style>
+
+<style>
+  /* overlay styles */
+  #audio-overlay{
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.6);
+    z-index: 10000;
+  }
+  #audio-overlay[aria-hidden="false"]{ display: flex; }
+  .audio-overlay-inner{
+    background: white;
+    color: #222;
+    padding: 20px 24px;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 90%;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.3);
+  }
+  #audio-overlay-btn{
+    margin-top: 12px;
+    padding: 8px 14px;
+    background: #2e6049;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+</style>
 </style>
 
 <script>
@@ -370,15 +411,35 @@ Amacımız, bu kadim enstrümanı tanıtmak, öğretmek ve müzikseverlerle bulu
       updateButton(false);
     }
 
+    // helper to show overlay
+    const overlay = document.getElementById('audio-overlay');
+    const overlayBtn = document.getElementById('audio-overlay-btn');
+    function showOverlay(){
+      overlay.setAttribute('aria-hidden','false');
+    }
+    function hideOverlay(){
+      overlay.setAttribute('aria-hidden','true');
+    }
+
+    async function tryPlay(){
+      try{
+        await audio.play();
+        updateButton(true);
+        localStorage.setItem('sada-audio-playing','true');
+        hideOverlay();
+        return true;
+      }catch(e){
+        // still blocked
+        return false;
+      }
+    }
+
     btn.addEventListener('click', async function(){
       if(audio.paused){
-        try{
-          await audio.play();
-          updateButton(true);
-          localStorage.setItem('sada-audio-playing','true');
-        }catch(e){
-          // play was blocked — inform user (simple fallback)
-          alert('Tarayıcı otomatik oynatmayı engelledi. Lütfen çalmak için sayfada bir kez tıklayın.');
+        const ok = await tryPlay();
+        if(!ok){
+          // show a friendly overlay telling the user to interact
+          showOverlay();
         }
       } else {
         audio.pause();
@@ -386,6 +447,21 @@ Amacımız, bu kadim enstrümanı tanıtmak, öğretmek ve müzikseverlerle bulu
         localStorage.setItem('sada-audio-playing','false');
       }
     });
+
+    // If autoplay earlier was blocked, allow a single user interaction anywhere to start audio
+    overlayBtn.addEventListener('click', async function(e){
+      e.stopPropagation();
+      await tryPlay();
+    });
+
+    // Also try to play on the first user gesture (click/touch) anywhere on document to satisfy browser policy
+    function onFirstGesture(){
+      tryPlay();
+      document.removeEventListener('click', onFirstGesture);
+      document.removeEventListener('touchstart', onFirstGesture);
+    }
+    document.addEventListener('click', onFirstGesture);
+    document.addEventListener('touchstart', onFirstGesture);
   })();
 </script>
 
