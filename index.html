@@ -423,13 +423,33 @@ Amacımız, bu kadim enstrümanı tanıtmak, öğretmek ve müzikseverlerle bulu
 
     async function tryPlay(){
       try{
+        // Check if audio file exists first
+        const response = await fetch(audio.src);
+        if (!response.ok) {
+          console.error(`Müzik dosyası yüklenemedi: ${audio.src} (${response.status})`);
+          const msg = document.createElement('div');
+          msg.style.cssText = 'position:fixed;bottom:80px;left:16px;background:rgba(200,0,0,0.9);color:white;padding:8px 12px;border-radius:4px;';
+          msg.textContent = 'Müzik dosyası yüklenemedi!';
+          document.body.appendChild(msg);
+          setTimeout(() => msg.remove(), 3000);
+          return false;
+        }
+        
+        // Try to play
         await audio.play();
+        console.log('Müzik başlatıldı');
         updateButton(true);
         localStorage.setItem('sada-audio-playing','true');
         hideOverlay();
         return true;
       }catch(e){
-        // still blocked
+        console.warn('Müzik çalma hatası:', e.message);
+        // show error in UI
+        const msg = document.createElement('div');
+        msg.style.cssText = 'position:fixed;bottom:80px;left:16px;background:rgba(46,96,73,0.9);color:white;padding:8px 12px;border-radius:4px;';
+        msg.textContent = 'Müziği başlatmak için sayfada bir kez tıklayın';
+        document.body.appendChild(msg);
+        setTimeout(() => msg.remove(), 3000);
         return false;
       }
     }
