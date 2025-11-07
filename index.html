@@ -4,23 +4,36 @@
   <meta name="google-site-verification" content="...kod..." />
   <meta charset="UTF-8">
   <title>Sada Ney Atölyesi – El Yapımı Neyler</title>
-<meta name="description" content="Sada Ney Atölyesi, Ney, Kız Ney, Ney Satın Al, Ney Fiyat, Kız Ney Fiyat, Ney Nereden Alınır, Ney Bakımı, Ney Dersi, Ney Kursları, Ney Al, Ney Dersi.">
+<meta name="description" content="Sada Ney Atölyesi, Ney, Kız Ney,Bolahenk Ney Ney, Satın Al, Ney Fiyat, Kız Ney Fiyat, Ney Nereden Alınır, Ney Bakımı, Ney Dersi, Ney Kursları, Ney Al, Ney Dersi.">
   <meta name="robots" content="index, follow">
-  <link rel="icon" type="sadaneyatolyesi.github.io/resimler/kiz-ney.jpg">
-  <script type="application/ld+json">
+  <meta name="googlebot" content="index, follow">
+  <meta name="thumbnail" content="https://sadaneyatolyesi.github.io/resimler/kiz-ney.jpg">
+  <meta name="image" content="https://sadaneyatolyesi.github.io/resimler/kiz-ney.jpg">
+  <link rel="icon" href="/resimler/kiz-ney.jpg" type="image/jpeg">
+  <!-- Open Graph / Twitter Card for social thumbnails -->
+  <meta property="og:title" content="Sada Ney Atölyesi – El Yapımı Neyler">
+  <meta property="og:description" content="El yapımı neyler, ney dersleri ve satış - Sada Ney Atölyesi.">
+  <meta property="og:image" content="https://sadaneyatolyesi.github.io/resimler/kiz-ney.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sadaneyatolyesi.github.io/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://sadaneyatolyesi.github.io/resimler/kiz-ney.jpg">
+<script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Product",
-  "name": "Kız Ney",
-  "description": "Ney Dersi",
-  "image": "sadaneyatolyesi.github.io/resimler/kiz-ney.jpg",
-  "brand": "Sada Ney Atölyesi",
-  "offers": {
-    "@type": "Offer",
-    "priceCurrency": "TRY",
-    "price": "3000",
-    "availability": "https://schema.org/InStock"
-  }
+  "@type": "LocalBusiness",
+  "name": "Sadâ Ney Atölyesi",
+  "url": "https://sadaneyatolyesi.com",
+  "description": "El yapımı ney üretimi ve ney eğitimi",
+  "address": {
+    "@type": "41080",
+    "addressLocality": "Kartepe",
+    "addressCountry": "TR"
+  },
+  "openingHours": "Mo-Fr 10:00-18:00",
+  "telephone": "+905387945202"
 }
 </script>
 
@@ -304,6 +317,181 @@ Amacımız, bu kadim enstrümanı tanıtmak, öğretmek ve müzikseverlerle bulu
     <iframe src="https://www.youtube.com/embed/o6uklzNifl4" title="Ney Eğitimi 1" frameborder="0" allowfullscreen></iframe>
   </div>
 </section>
+
+<!-- Background audio control -->
+<audio id="bg-audio" src="/resimler/arkaplan.mp3" loop preload="auto"></audio>
+<button id="audio-toggle" class="audio-toggle" aria-pressed="false" title="Müziği aç/kapat">
+  <span id="audio-icon">🔈</span>
+</button>
+
+<!-- Overlay shown when autoplay is blocked -->
+<div id="audio-overlay" role="dialog" aria-hidden="true">
+  <div class="audio-overlay-inner">
+    <p>Tarayıcı otomatik oynatmayı engelledi. Müzik çalmak için ekranda bir kez tıklayın.</p>
+    <button id="audio-overlay-btn">Çal</button>
+  </div>
+</div>
+
+<style>
+  .audio-toggle{
+    position: fixed;
+    left: 16px;
+    bottom: 16px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(46,96,73,0.9);
+    color: white;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    cursor: pointer;
+    z-index: 9999;
+  }
+  .audio-toggle[aria-pressed="true"]{ background: rgba(196,53,53,0.95); }
+</style>
+
+<style>
+  /* overlay styles */
+  #audio-overlay{
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.6);
+    z-index: 10000;
+  }
+  #audio-overlay[aria-hidden="false"]{ display: flex; }
+  .audio-overlay-inner{
+    background: white;
+    color: #222;
+    padding: 20px 24px;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 90%;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.3);
+  }
+  #audio-overlay-btn{
+    margin-top: 12px;
+    padding: 8px 14px;
+    background: #2e6049;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+</style>
+</style>
+
+<script>
+  (function(){
+    const audio = document.getElementById('bg-audio');
+    const btn = document.getElementById('audio-toggle');
+    const icon = document.getElementById('audio-icon');
+
+    // Restore saved state
+    const saved = localStorage.getItem('sada-audio-playing');
+    const startPlaying = saved === 'true';
+
+    function updateButton(playing){
+      btn.setAttribute('aria-pressed', playing ? 'true' : 'false');
+      icon.textContent = playing ? '🔊' : '🔈';
+    }
+
+    // Try to auto-play if user previously allowed it
+    if(startPlaying){
+      // attempt play; this may be blocked by browser policy
+      audio.play().then(()=>{
+        updateButton(true);
+      }).catch(()=>{
+        updateButton(false);
+      });
+    } else {
+      updateButton(false);
+    }
+
+    // helper to show overlay
+    const overlay = document.getElementById('audio-overlay');
+    const overlayBtn = document.getElementById('audio-overlay-btn');
+    function showOverlay(){
+      overlay.setAttribute('aria-hidden','false');
+    }
+    function hideOverlay(){
+      overlay.setAttribute('aria-hidden','true');
+    }
+
+    async function tryPlay(){
+      try{
+        // Check if audio file exists first
+        const response = await fetch(audio.src);
+        if (!response.ok) {
+          console.error(`Müzik dosyası yüklenemedi: ${audio.src} (${response.status})`);
+          const msg = document.createElement('div');
+          msg.style.cssText = 'position:fixed;bottom:80px;left:16px;background:rgba(200,0,0,0.9);color:white;padding:8px 12px;border-radius:4px;';
+          msg.textContent = 'Müzik dosyası yüklenemedi!';
+          document.body.appendChild(msg);
+          setTimeout(() => msg.remove(), 3000);
+          return false;
+        }
+        
+        // Try to play
+        await audio.play();
+        console.log('Müzik başlatıldı');
+        updateButton(true);
+        localStorage.setItem('sada-audio-playing','true');
+        hideOverlay();
+        return true;
+      }catch(e){
+        console.warn('Müzik çalma hatası:', e.message);
+        // show error in UI
+        const msg = document.createElement('div');
+        msg.style.cssText = 'position:fixed;bottom:80px;left:16px;background:rgba(46,96,73,0.9);color:white;padding:8px 12px;border-radius:4px;';
+        msg.textContent = 'Müziği başlatmak için sayfada bir kez tıklayın';
+        document.body.appendChild(msg);
+        setTimeout(() => msg.remove(), 3000);
+        return false;
+      }
+    }
+
+    btn.addEventListener('click', async function(){
+      if(audio.paused){
+        const ok = await tryPlay();
+        if(!ok){
+          // show a friendly overlay telling the user to interact
+          showOverlay();
+        }
+      } else {
+        audio.pause();
+        updateButton(false);
+        localStorage.setItem('sada-audio-playing','false');
+      }
+    });
+
+    // If autoplay earlier was blocked, allow a single user interaction anywhere to start audio
+    overlayBtn.addEventListener('click', async function(e){
+      e.stopPropagation();
+      await tryPlay();
+    });
+
+    // Also try to play on the first user gesture (click/touch) anywhere on document to satisfy browser policy
+    function onFirstGesture(){
+      tryPlay();
+      document.removeEventListener('click', onFirstGesture);
+      document.removeEventListener('touchstart', onFirstGesture);
+    }
+    document.addEventListener('click', onFirstGesture);
+    document.addEventListener('touchstart', onFirstGesture);
+  })();
+</script>
+
+
+
+
+
 
 
 
